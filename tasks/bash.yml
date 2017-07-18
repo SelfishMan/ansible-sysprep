@@ -1,0 +1,21 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - "/root/"
+      - "/home/"
+    filterfiles_include:
+      - '\.bash_history$'
+
+- name: Remove bash history for users
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

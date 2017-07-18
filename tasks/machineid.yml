@@ -1,0 +1,13 @@
+---
+
+# FIXME: Verify that this regenerates properly before enabling
+- name: Remove the local machine ID
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/machine-id
+    - /var/lib/dbus/machine-id
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

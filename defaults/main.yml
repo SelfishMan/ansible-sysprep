@@ -1,0 +1,6 @@
+---
+
+sysprep_sshd_clean: true
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

@@ -1,0 +1,27 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /var/cache/
+      - /var/lib/rpm/
+      - /var/lib/yum/
+    filterfiles_include:
+      - '^/var/cache/apt/archives/.*'
+      - '^/var/cache/dnf/.*'
+      - '^/var/cache/yum/.*'
+      - '^/var/cache/zypp.*'
+      - '^/var/lib/rpm/__db\..*'
+      - '^/var/lib/yum/uuid$'
+
+- name: Remove package manager cache
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

@@ -1,0 +1,22 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /etc/sysconfig/
+      - /etc/smolt/
+    filterfiles_include:
+      - '^/etc/sysconfig/hw-uuid$'
+      - '^/etc/smolt/(hw-)?uuid$'
+
+- name: Remove Smolt hardware UUID
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

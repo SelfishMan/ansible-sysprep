@@ -1,0 +1,22 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /var/lib/dhclient/
+      - /var/lib/dhcp/
+      - /var/lib/dhcpd/
+    filterfiles_include:
+      - '.*'
+
+- name: Remove DHCP client and server lease information
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

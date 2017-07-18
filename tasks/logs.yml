@@ -1,0 +1,113 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /var/log/
+      - /var/named/data/
+      - /root/
+      - /var/lib/
+      - /var/cache/
+      - /etc/Pegasus/
+    filterfiles_include:
+      # log files
+      - '^/var/log/.*\.log.*$'
+      - '^/var/log/audit/.*$'
+      - '^/var/log/btmp.*$'
+      - '^/var/log/cron.*$'
+      - '^/var/log/dmesg.*$'
+      - '^/var/log/lastlog.*$'
+      - '^/var/log/maillog.*$'
+      - '^/var/log/mail/.*$'
+      - '^/var/log/messages.*$'
+      - '^/var/log/secure.*$'
+      - '^/var/log/spooler.*$'
+      - '^/var/log/tallylog.*$'
+      - '^/var/log/wtmp.*$'
+      - '^/var/log/apache2/.*_log$'
+      - '^/var/log/apache2/.*_log-.*$'
+      - '^/var/log/ntp$'
+      - '^/var/log/tuned/tuned.log$'
+      - '^/var/log/debug.*$'
+      - '^/var/log/syslog.*$'
+      - '^/var/log/faillog.*$'
+      - '^/var/log/firewalld.*$'
+      - '^/var/log/grubby.*$'
+      - '^/var/log/xferlog/*$'
+      # logfiles configured by /etc/logrotate.d/*
+      - '^/var/log/BackupPC/LOG$'
+      - '^/var/log/ceph/.*\.log$'
+      - '^/var/log/chrony/.*\.log$'
+      - '^/var/log/cups/.*_log.*$'
+      - '^/var/log/glusterfs/*glusterd\.vol\.log$'
+      - '^/var/log/glusterfs/glusterfs\.log$'
+      - '^/var/log/httpd/.*log$'
+      - '^/var/log/jetty/jetty-console\.log$'
+      - '^/var/log/libvirt/libxl/.*\.log$'
+      - '^/var/log/libvirt/libvirtd\.log$'
+      - '^/var/log/libvirt/lxc/.*\.log$'
+      - '^/var/log/libvirt/qemu/.*\.log$'
+      - '^/var/log/libvirt/uml/.*\.log$'
+      - '^/var/named/data/named\.run$'
+      - '^/var/log/ppp/connect-errors$'
+      - '^/var/log/setroubleshoot/.*\.log$'
+      - '^/var/log/squid/.*\.log$'
+      # and the status file of logrotate
+      - '^/var/lib/logrotate\.status$'
+      # yum installation files
+      - '^/root/install\.log$'
+      - '^/root/install\.log\.syslog$'
+      - '^/root/anaconda-ks\.cfg$'
+      - '^/root/anaconda-post\.log$'
+      - '^/root/initial-setup-ks\.cfg$'
+      - '^/root/original-ks\.cfg$'
+      - '^/var/log/anaconda\.syslog$'
+      - '^/var/log/anaconda/.*$'
+      # debian-installer files
+      - '^/var/log/installer/.*$'
+      # GDM and session preferences
+      - '^/var/cache/gdm/.*$'
+      - '^/var/lib/AccountService/users/.*$'
+      # Fingerprint service files
+      - '^/var/lib/fprint/.*$'
+      # fontconfig caches
+      - '^/var/cache/fontconfig/.*$'
+      # man pages cache
+      - '^/var/cache/man/.*$'
+      # log file of sysstat
+      - '^/var/log/sa/.*$'
+      # log file of gdm
+      - '^/var/log/gdm/.*$'
+      # log file of lightdm
+      - '^/var/log/lightdm/.*$'
+      # log file of ntp
+      - '^/var/log/ntpstats/.*$'
+      # Pegasus certificates and other files
+      - '^/etc/Pegasus/.*\.cnf$'
+      - '^/etc/Pegasus/.*\.crt$'
+      - '^/etc/Pegasus/.*\.csr$'
+      - '^/etc/Pegasus/.*\.pem$'
+      - '^/etc/Pegasus/.*\.srl$'
+      # Red Hat subscription manager log files
+      - '^/var/log/rhsm/.*$'
+      # journals of systemd
+      - '^/var/log/journal/.*$'
+      # Debian logs: apt & aptitude
+      - '^/var/log/aptitude.*$'
+      - '^/var/log/apt/.*$'
+      # log files of exim
+      - '^/var/log/exim4/.*$'
+      # log files of ConsoleKit
+      - '^/var/log/ConsoleKit/.*$'
+
+- name: Remove log files and caches
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

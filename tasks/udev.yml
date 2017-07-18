@@ -1,0 +1,15 @@
+---
+
+- name: Remove udev persistent rules
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/udev/rules.d/60-net.rules
+    - /etc/udev/rules.d/70-persistent-net.rules
+    - /etc/udev/rules.d/71-biosdevname.rules
+    - /etc/udev/rules.d/80-net-name-slot.rules
+    - /etc/udev/rules.d/80-net-setup-link.rules
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

@@ -1,0 +1,29 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /etc/sysconfig/
+    filterfiles_include:
+      - '^/etc/sysconfig/network-scripts/ifcfg-.*$'
+      - '^/etc/sysconfig/network$'
+
+- name: Remove system-specific keys in network interface configuration
+  when: filterfiles_files is defined and filterfiles_files|length > 0
+  lineinfile:
+    path: "{{ item[0] }}"
+    regexp: "{{ item[1] }}"
+    state: absent
+  vars:
+    filter_keys:
+      - "^HWADDR"
+      - "^HOSTNAME"
+      - "^DHCP_HOSTNAME"
+  with_nested:
+    - "{{ filterfiles_files }}"
+    - "{{ filter_keys }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

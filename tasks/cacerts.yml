@@ -1,0 +1,33 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /etc/pki/CA/certs/
+      - /etc/pki/CA/crl/
+      - /etc/pki/CA/newcerts/
+      - /etc/pki/CA/private/
+      - /etc/pki/tls/certs/
+      - /etc/pki/tls/private/
+    filterfiles_include:
+      - '^/etc/pki/CA/certs/.*\.crt$'
+      - '^/etc/pki/CA/crl/.*\.crt$'
+      - '^/etc/pki/CA/newcerts/.*\.crt$'
+      - '^/etc/pki/CA/private/.*\.key$'
+      - '^/etc/pki/tls/private/.*\.key$'
+      - '^/etc/pki/tls/certs/.*\.crt$'
+    filterfiles_exclude:
+      - '^/etc/pki/tls/certs/ca-bundle\.crt$'
+      - '^/etc/pki/tls/certs/ca-bundle\.trust\.crt$'
+
+- name: Remove CA certificates
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

@@ -1,0 +1,18 @@
+---
+
+- name: Remove blkid tab
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /var/run/blkid.tab
+    - /var/run/blkid.tab.old
+    - /etc/blkid/blkid.tab
+    - /etc/blkid/blkid.tab.old
+    - /etc/blkid.tab
+    - /etc/blkid.tab.old
+    - /dev/.blkid.tab
+    - /dev/.blkid.tab.old
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

@@ -1,0 +1,22 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /var/account/
+      - /var/log/account/
+    filterfiles_include:
+      - '^/var/account/pacct.*'
+      - '^/var/log/account/pacct.*'
+
+- name: Remove the process accounting log files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

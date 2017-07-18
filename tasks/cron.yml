@@ -1,0 +1,24 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /var/spool/at/
+      - /var/spool/atjobs/
+      - /var/spool/atspool/
+    filterfiles_include:
+      - '.*'
+
+- name: Remove user at-jobs and cron-jobs
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# TODO: Reset .SEQ
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

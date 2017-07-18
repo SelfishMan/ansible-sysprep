@@ -1,0 +1,23 @@
+---
+
+- name: Filter files
+  import_role:
+    name: filterfiles
+  vars:
+    filterfiles_paths:
+      - /etc/pki/
+      - /etc/sysconfig/rhn/
+    filterfiles_include:
+      - '^/etc/pki/(consumer|entitlement)/.*'
+      - '^/etc/sysconfig/rhn/systemid$'
+      - '^/etc/sysconfig/rhn/osad-auth\.conf$'
+
+- name: Remove Red Hat Network files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ filterfiles_files }}"
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+

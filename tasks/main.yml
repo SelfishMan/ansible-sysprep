@@ -1,0 +1,34 @@
+---
+
+- import_tasks: abrt.yml
+- import_tasks: bash.yml
+- import_tasks: blkid.yml
+- import_tasks: cacerts.yml
+- import_tasks: crash.yml
+- import_tasks: cron.yml
+- import_tasks: dhcp.yml
+- import_tasks: dovecot.yml
+- import_tasks: firewall.yml
+- import_tasks: kerberos.yml
+- import_tasks: logs.yml
+#DO NOT ENABLE#- import_tasks: machineid.yml
+- import_tasks: mail.yml
+- import_tasks: network.yml
+- import_tasks: pacct.yml
+- import_tasks: package.yml
+- import_tasks: pam.yml
+- import_tasks: passwd.yml
+- import_tasks: puppet.yml
+- import_tasks: rhn.yml
+- import_tasks: samba.yml
+- import_tasks: smolt.yml
+- import_tasks: sssd.yml
+- import_tasks: tmp.yml
+- import_tasks: udev.yml
+- import_tasks: utmp.yml
+
+# This has to be last since it kills sshd
+- import_tasks: ssh.yml
+
+# vim:ft=ansible:et:ts=2:sw=2:sts=2:
+
