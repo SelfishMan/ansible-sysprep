@@ -8,6 +8,7 @@
       - /var/cache/
       - /var/lib/rpm/
       - /var/lib/yum/
+      - /var/lib/apt/
     filterfiles_include:
       - '^/var/cache/apt/archives/.*'
       - '^/var/cache/dnf/.*'
@@ -15,6 +16,12 @@
       - '^/var/cache/zypp.*'
       - '^/var/lib/rpm/__db\..*'
       - '^/var/lib/yum/uuid$'
+      - '^/var/lib/apt/lists/.*$'
+      - '^/var/lib/apt/periodic/.*$'
+      - '^/var/lib/apt/mirrors/.*$'
+      - '^/var/lib/apt/lists/cdrom.*$'
+      - '^/var/lib/apt/lists/daily_lock.*$'
+      - '^/var/lib/apt/lists/extended_states.*$'
 
 - name: Remove package manager cache
   file:
