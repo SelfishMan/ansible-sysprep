@@ -7,6 +7,8 @@
   with_items:
     - /var/run/blkid.tab
     - /var/run/blkid.tab.old
+    - /var/run/blkid/blkid.tab
+    - /var/run/blkid/blkid.tab.old
     - /etc/blkid/blkid.tab
     - /etc/blkid/blkid.tab.old
     - /etc/blkid.tab

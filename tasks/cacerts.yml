@@ -11,6 +11,8 @@
       - /etc/pki/CA/private/
       - /etc/pki/tls/certs/
       - /etc/pki/tls/private/
+      - /etc/ssl/certs/
+      - /etc/ssl/private/
     filterfiles_include:
       - '^/etc/pki/CA/certs/.*\.crt$'
       - '^/etc/pki/CA/crl/.*\.crt$'
@@ -18,9 +20,14 @@
       - '^/etc/pki/CA/private/.*\.key$'
       - '^/etc/pki/tls/private/.*\.key$'
       - '^/etc/pki/tls/certs/.*\.crt$'
+      - '^/etc/ssl/certs/.*\.pem$'
+      - '^/etc/ssl/private/.*\.pem$'
     filterfiles_exclude:
       - '^/etc/pki/tls/certs/ca-bundle\.crt$'
       - '^/etc/pki/tls/certs/ca-bundle\.trust\.crt$'
+      - '^/etc/ssl/certs/ca-certificates\.crt$'
+      - '^/etc/ssl/certs/.*snakeoil.*$'
+      - '^/etc/ssl/private/.*snakeoil.*$'
 
 - name: Remove CA certificates
   file:
