@@ -20,7 +20,7 @@
       - '^/etc/pki/CA/private/.*\.key$'
       - '^/etc/pki/tls/private/.*\.key$'
       - '^/etc/pki/tls/certs/.*\.crt$'
-      - '^/etc/ssl/certs/.*\.pem$'
+      - '^/etc/ssl/certs/.*\.crt$'
       - '^/etc/ssl/private/.*\.pem$'
     filterfiles_exclude:
       - '^/etc/pki/tls/certs/ca-bundle\.crt$'
