@@ -8,10 +8,12 @@
       - /etc/sysconfig/iptables
       - /etc/firewalld/services/
       - /etc/firewalld/zones/
+      - /etc/ufw/applications.d/
     filterfiles_include:
       - '^/etc/sysconfig/iptables$'
       - '^/etc/firewalld/services/.*'
       - '^/etc/firewalld/zones/.*'
+      - '^/etc/ufw/applications.d/.*'
 
 - name: Remove firewall rules
   file:
