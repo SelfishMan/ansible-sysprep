@@ -8,6 +8,9 @@
       - /var/spool/at/
       - /var/spool/atjobs/
       - /var/spool/atspool/
+      - /var/spool/cron/at/
+      - /var/spool/cron/atjobs/
+      - /var/spool/cron/atspool/
     filterfiles_include:
       - '.*'
 
