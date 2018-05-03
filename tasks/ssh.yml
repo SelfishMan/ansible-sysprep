@@ -8,18 +8,23 @@
       - /etc/ssh/
       - /home/
     filterfiles_include:
-      - '^/etc/ssh/.*_host_.*'
+#      - '^/etc/ssh/.*_host_.*'
       - '^/home/.*?/.ssh/.*'
     filterfiles_exclude:
       - '^/home/provision/.ssh/.*'
 
-- name: Remove host SSH keys and user .ssh directory contents
+- name: Remove user .ssh directory contents
   when: sysprep_sshd_clean
   file:
     path: "{{ item }}"
     state: absent
   with_items:
     - "{{ filterfiles_files }}"
+
+# This breaks SSH so no further connections can be established without regeneration
+- name: Remove host SSH keys
+  when: sysprep_sshd_clean
+  command: "rm -f /etc/ssh/*_host_*"
 
 # vim:ft=ansible:et:ts=2:sw=2:sts=2:
 
